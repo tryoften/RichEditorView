@@ -127,7 +127,7 @@ public class RichEditorToolbar: UIView {
         updateToolbar()
     }
     
-    func updateToolbar() {
+    public func updateToolbar() {
         var buttons = [UIBarButtonItem]()
         for option in options {
             if let image = option.image() {
