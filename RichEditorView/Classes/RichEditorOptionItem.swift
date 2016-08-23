@@ -138,7 +138,7 @@ public enum RichEditorOptions: RichEditorOption {
         case .AlignLeft: name = "justify_left"
         case .AlignCenter: name = "justify_center"
         case .AlignRight: name = "justify_right"
-        case .Image: name = "insert_image"
+        case .Image: name = "camera"
         case .Link: name = "insert_link"
         }
         
