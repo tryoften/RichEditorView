@@ -131,8 +131,8 @@ RE.removeFormat = function() {
 };
 
 RE.setFontSize = function(size) {
-    //document.execCommand("fontSize", false, size);
-    RE.editor.style.fontSize = size;
+    document.execCommand("fontSize", false, size);
+    //RE.editor.style.fontSize = size;
 };
 
 RE.setBackgroundColor = function(color) {
