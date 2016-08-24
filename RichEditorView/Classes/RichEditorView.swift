@@ -207,8 +207,12 @@ extension RichEditorView {
         runJS("RE.removeFormat();")
     }
     
-    public func setFontSize(size: Int) {
-        runJS("RE.setFontSize('\(size))px');")
+    public func setRegularFontSize() {
+        runJS("RE.setRegularFontSize();")
+    }
+
+    public func setLargerFontSize() {
+        runJS("RE.setLargerFontSize();")
     }
     
     public func setEditorBackgroundColor(color: UIColor) {

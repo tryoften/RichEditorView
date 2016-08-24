@@ -130,8 +130,13 @@ RE.removeFormat = function() {
     document.execCommand('removeFormat', false, null);
 };
 
-RE.setFontSize = function(size) {
-    document.execCommand("fontSize", false, size);
+RE.setRegularFontSize = function(size) {
+    document.execCommand("fontSize", false, 3);
+    //RE.editor.style.fontSize = size;
+};
+
+RE.setLargerFontSize = function() {
+    document.execCommand("fontSize", false, 7);
     //RE.editor.style.fontSize = size;
 };
 
