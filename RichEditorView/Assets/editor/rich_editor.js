@@ -136,7 +136,7 @@ RE.setRegularFontSize = function(size) {
 };
 
 RE.setLargerFontSize = function() {
-    document.execCommand("fontSize", false, "7");
+    document.execCommand("fontSize", false, "4");
     //RE.editor.style.fontSize = size;
 };
 
