@@ -131,18 +131,22 @@ RE.removeFormat = function() {
 };
 
 RE.setRegularFontSize = function(size) {
-    document.execCommand("fontSize", false, 3);
+    document.execCommand("fontSize", false, "3");
     //RE.editor.style.fontSize = size;
 };
 
 RE.setLargerFontSize = function() {
-    document.execCommand("fontSize", false, 7);
+    document.execCommand("fontSize", false, "7");
     //RE.editor.style.fontSize = size;
 };
 
 RE.setBackgroundColor = function(color) {
     RE.editor.style.backgroundColor = color;
 };
+
+RE.setMainFont = function() {
+    document.execCommand("fontName", false, "Courier");
+}
 
 RE.setHeight = function(size) {
     RE.editor.style.height = size;
