@@ -136,7 +136,12 @@ RE.setRegularFontSize = function(size) {
 };
 
 RE.setLargerFontSize = function() {
-    document.execCommand("fontSize", false, "4");
+    document.execCommand("fontSize", false, "5");
+    //RE.editor.style.fontSize = size;
+};
+
+RE.setItalicsFontSize = function() {
+    document.execCommand("fontSize", false, "6");
     //RE.editor.style.fontSize = size;
 };
 

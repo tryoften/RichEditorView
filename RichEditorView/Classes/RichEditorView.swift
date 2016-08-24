@@ -215,6 +215,10 @@ extension RichEditorView {
         runJS("RE.setLargerFontSize();")
     }
 
+    public func setItalicsFontSize() {
+        runJS("RE.setItalicsFontSize();")
+    }
+
     public func setMainFont() {
         runJS("RE.setMainFont();")
     }
