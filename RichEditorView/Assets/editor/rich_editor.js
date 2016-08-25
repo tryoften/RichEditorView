@@ -136,13 +136,11 @@ RE.setRegularFontSize = function(size) {
 };
 
 RE.setLargerFontSize = function() {
-    document.execCommand("fontSize", false, "5");
-    //RE.editor.style.fontSize = size;
+    document.execCommand("fontSize", false, "4");
 };
 
 RE.setItalicsFontSize = function() {
-    document.execCommand("fontSize", false, "6");
-    //RE.editor.style.fontSize = size;
+    document.execCommand("fontSize", false, "5");
 };
 
 RE.setBackgroundColor = function(color) {
@@ -151,6 +149,10 @@ RE.setBackgroundColor = function(color) {
 
 RE.setMainFont = function() {
     document.execCommand("fontName", false, "Courier");
+}
+
+RE.insertNewLine = function() {
+    RE.insertHTML("<b>");
 }
 
 RE.setHeight = function(size) {

@@ -222,6 +222,10 @@ extension RichEditorView {
     public func setMainFont() {
         runJS("RE.setMainFont();")
     }
+
+    public func insertNewLine() {
+        runJS("RE.insertNewLine();")
+    }
     
     public func setEditorBackgroundColor(color: UIColor) {
         let hex = colorToHex(color)
