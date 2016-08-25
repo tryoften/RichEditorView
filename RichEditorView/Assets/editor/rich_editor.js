@@ -152,7 +152,7 @@ RE.setMainFont = function() {
 }
 
 RE.insertNewLine = function() {
-    RE.insertHTML("<b>");
+    RE.insertHTML("<b></b>");
 }
 
 RE.setHeight = function(size) {
