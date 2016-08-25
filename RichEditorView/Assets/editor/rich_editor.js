@@ -132,11 +132,10 @@ RE.removeFormat = function() {
 
 RE.setRegularFontSize = function(size) {
     document.execCommand("fontSize", false, "3");
-    //RE.editor.style.fontSize = size;
 };
 
 RE.setLargerFontSize = function() {
-    document.execCommand("fontSize", false, "4");
+    document.execCommand("fontSize", false, "4.5");
 };
 
 RE.setItalicsFontSize = function() {
@@ -152,7 +151,7 @@ RE.setMainFont = function() {
 }
 
 RE.insertNewLine = function() {
-    RE.insertHTML("<b></b>");
+    RE.insertHTML("<br>");
 }
 
 RE.setHeight = function(size) {
