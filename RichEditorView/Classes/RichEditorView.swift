@@ -352,7 +352,6 @@ extension RichEditorView {
         - returns: nil if href is empty, otherwise a non-empty String
     */
     public func getSelectedHref() -> String? {
-        //if !rangeSelectionExists() { return nil }
         let href = runJS("RE.getSelectedHref();")
         if href == "" {
             return nil
