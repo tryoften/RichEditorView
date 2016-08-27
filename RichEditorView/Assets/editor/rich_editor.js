@@ -364,6 +364,12 @@ RE.countAnchorTagsInNode = function(node) {
     return RE.getAnchorTagsInNode(node).length;
 };
 
+RE.getTagForParentNode = function(node) {
+    if (node.parentNode != null) {
+        return node.parentNode.localName
+    }
+};
+
 /**
  * If the current selection's parent is an anchor tag, get the href.
  * @returns {string}
@@ -376,7 +382,10 @@ RE.getSelectedHref = function() {
         return null;
     }
 
-    var tags = RE.getAnchorTagsInNode(sel.anchorNode);
+    //var tags = RE.getAnchorTagsInNode(sel.anchorNode);
+    var tag = RE.getTagForParentNode(sel.anchorNode);
+    return tag;
+    
     //if more than one link is there, return null
     if (tags.length > 1) {
         return null;
