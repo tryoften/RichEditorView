@@ -377,7 +377,7 @@ RE.getTagForParentNode = function(node) {
 RE.getSelectedHref = function() {
     var href, sel;
     href = '';
-    sel = window.getSelection();
+    sel = document.getSelection();
     if (!RE.rangeOrCaretSelectionExists()) {
         return null;
     }
@@ -385,7 +385,7 @@ RE.getSelectedHref = function() {
     //var tags = RE.getAnchorTagsInNode(sel.anchorNode);
     var tag = RE.getTagForParentNode(sel.anchorNode);
     return tag;
-    
+
     //if more than one link is there, return null
     if (tags.length > 1) {
         return null;
