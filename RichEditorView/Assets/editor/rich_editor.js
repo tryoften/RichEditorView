@@ -377,12 +377,8 @@ RE.getTagForParentNode = function(node) {
 RE.getSelectedHref = function() {
     var href, sel;
     href = '';
-    sel = document.getSelection();
-    if (!RE.rangeOrCaretSelectionExists()) {
-        return null;
-    }
+    sel = window.getSelection();
 
-    //var tags = RE.getAnchorTagsInNode(sel.anchorNode);
     var tag = RE.getTagForParentNode(sel.anchorNode);
     return tag;
 
