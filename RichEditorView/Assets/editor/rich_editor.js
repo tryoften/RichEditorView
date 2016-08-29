@@ -380,7 +380,18 @@ RE.getSelectedHref = function() {
     sel = window.getSelection();
 
     var tag = RE.getTagForParentNode(sel.anchorNode);
-    return tag;
+
+    try {
+        if (window.getSelection) {
+            sel = window.getSelection().getRangeAt(0).parentNode.localName;
+            return sel
+        } else {
+            sel = document.getSelection().getRangeAt(0).parentNode.localName;
+            return sel
+        }
+    } catch (err) {
+        // nothing
+    }
 
     //if more than one link is there, return null
     if (tags.length > 1) {
