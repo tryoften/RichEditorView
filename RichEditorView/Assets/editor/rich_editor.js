@@ -379,7 +379,7 @@ RE.getSelectedHref = function() {
     href = '';
     sel = window.getSelection();
 
-    var tag = RE.getTagForParentNode(sel.anchorNode.parentNode);
+    var tag = RE.getTagForParentNode(sel.anchorNode);
     return tag;
 
     //if more than one link is there, return null
