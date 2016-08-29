@@ -383,10 +383,10 @@ RE.getSelectedHref = function() {
 
     try {
         if (window.getSelection) {
-            sel = window.getSelection().getRangeAt(0).parentNode.localName;
+            sel = window.getSelection().anchorNode.parentNode.localName;
             return sel
         } else {
-            sel = document.getSelection().getRangeAt(0).parentNode.localName;
+            sel = document.getSelection().anchorNode.parentNode.localName;
             return sel
         }
     } catch (err) {
