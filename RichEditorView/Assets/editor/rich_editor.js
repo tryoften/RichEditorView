@@ -330,6 +330,18 @@ RE.blurFocus = function() {
     RE.editor.blur();
 };
 
+RE.getCursorPosition = function() {
+    var range = window.getSelection().getRangeAt(0);
+    var selected = range.toString().length;
+    var preCaretRange = range.cloneRange();
+
+    preCaretRange.selectNodeContents(document);
+    preCaretRange.setEnd(range.endContainer, range.endOffset);
+    caretOffset = preCaretRange.toString().length;
+    return caretOffset
+}
+
+
 /**
 Recursively search element ancestors to find a element nodeName e.g. A
 **/

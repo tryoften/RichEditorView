@@ -333,6 +333,10 @@ extension RichEditorView {
         runJS("RE.blurFocus()")
     }
 
+    public func getCursorPosition() {
+        runJS("RE.getCursorPosition()")
+    }
+
     /**
         Looks specifically for a selection of type "Range"
     */
