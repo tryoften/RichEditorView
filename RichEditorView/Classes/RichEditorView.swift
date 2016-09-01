@@ -334,7 +334,7 @@ extension RichEditorView {
     }
 
     public func getCursorPosition() -> String? {
-        runJS("RE.getCursorPosition()")
+        return runJS("RE.getCursorPosition()")
     }
 
     /**
