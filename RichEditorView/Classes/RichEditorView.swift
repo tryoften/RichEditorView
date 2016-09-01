@@ -333,7 +333,7 @@ extension RichEditorView {
         runJS("RE.blurFocus()")
     }
 
-    public func getCursorPosition() {
+    public func getCursorPosition() -> String? {
         runJS("RE.getCursorPosition()")
     }
 
