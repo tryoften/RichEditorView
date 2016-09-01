@@ -332,6 +332,7 @@ RE.blurFocus = function() {
 
 RE.getCursorPosition = function() {
     var caretOffset = 0;
+    var element = document.getElementById("editor");
     if (typeof window.getSelection != "undefined") {
         var range = window.getSelection().getRangeAt(0);
         var preCaretRange = range.cloneRange();
