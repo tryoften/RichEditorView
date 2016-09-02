@@ -364,6 +364,14 @@ extension RichEditorView {
         }
     }
 
+    public func getBoldState() -> String? {
+        return runJS("RE.getBoldState();")
+    }
+
+    public func getItalicState() -> String? {
+        return runJS("RE.getBoldState();")
+    }
+
     /**
         Runs some JavaScript on the UIWebView and returns the result
         If there is no result, returns an empty string

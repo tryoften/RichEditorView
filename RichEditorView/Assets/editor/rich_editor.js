@@ -349,6 +349,13 @@ RE.getCursorPosition = function() {
     return caretOffset;
 }
 
+RE.getBoldState = function() {
+    return document.queryCommandState("Bold");
+}
+
+RE.getItalicState = function() {
+    return document.queryCommandState("Italic");
+}
 
 /**
 Recursively search element ancestors to find a element nodeName e.g. A
