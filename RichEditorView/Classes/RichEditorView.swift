@@ -372,6 +372,10 @@ extension RichEditorView {
         return runJS("RE.getBoldState();")
     }
 
+    public func getElementFontSize() -> String? {
+        return runJS("RE.getElementFontSize();")
+    }
+
     /**
         Runs some JavaScript on the UIWebView and returns the result
         If there is no result, returns an empty string

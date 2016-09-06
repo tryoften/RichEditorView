@@ -357,6 +357,12 @@ RE.getItalicState = function() {
     return document.queryCommandState("Italic");
 }
 
+RE.getElementFontSize = function() {
+    sel = window.getSelection();
+    node = sel.anchorNode.parentNode;
+    return node.size;
+}
+
 /**
 Recursively search element ancestors to find a element nodeName e.g. A
 **/
