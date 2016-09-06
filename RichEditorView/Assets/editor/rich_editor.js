@@ -359,7 +359,12 @@ RE.getItalicState = function() {
 
 RE.getElementFontSize = function() {
     var sel = document.getSelection();
-    return sel.anchorNode.parentNode.size;
+    var size = sel.anchorNode.parentNode.size;
+    if (size != "") {
+        return size;
+    } else {
+        return sel.anchorNode.parentNode.parentNode.size;
+    }
 }
 
 /**
