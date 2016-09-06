@@ -358,7 +358,7 @@ RE.getItalicState = function() {
 }
 
 RE.getElementFontSize = function() {
-    sel = document.getSelection();
+    var sel = document.getSelection();
     return sel.anchorNode.parentNode.size;
 }
 
