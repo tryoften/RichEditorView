@@ -402,16 +402,7 @@ RE.countAnchorTagsInNode = function(node) {
 };
 
 RE.getTagForParentNode = function(node) {
-    var tag = '';
     if (node.parentNode != null) {
-        if node.parentNode.localName == "span" {
-            tag = node.parentNode.parentNode.parentNode.localName;
-            if tag == "ul" || tag == "ol" {
-                return tag;
-            } else {
-                return node.parentNode.localName
-            }
-        }
         return node.parentNode.localName
     }
 };
