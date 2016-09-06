@@ -403,7 +403,14 @@ RE.countAnchorTagsInNode = function(node) {
 
 RE.getTagForParentNode = function(node) {
     if (node.parentNode != null) {
-        return node.parentNode.localName
+        if node.parentNode.localName == "span" {
+            if node.parentNode.parentNode.parentNode.localName !== undefined {
+                return node.parentNode.parentNode.parentNode.localName;
+            }
+
+            return "span";
+        }
+        return node.parentNode.localName;
     }
 };
 
