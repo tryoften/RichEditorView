@@ -409,8 +409,25 @@ RE.getTagForParentNode = function(node) {
 
 RE.boldCurrentDiv = function() {
     var sel = document.getSelection();
-    if (sel.anchorNode.parentNode.localName == "div") {
-        sel.anchorNode.parentNode.style.fontWeight = "900";
+    if (sel.anchorNode.parentNode.localName == "div" || sel.anchorNode.parentNode.localName == "li") {
+        sel.anchorNode.parentNode.style.fontWeight = "700";
+    } else if (sel.anchorNode.parentNode.localName == "span") {
+        if (sel.anchorNode.parentNode.parentNode.localName == "li") {
+            sel.anchorNode.parentNode.style.fontWeight = "700";
+        }
+        sel.anchorNode.parentNode.style.fontWeight = "700";
+    }
+}
+
+RE.unboldCurrentDiv = function() {
+    var sel = document.getSelection();
+    if (sel.anchorNode.parentNode.localName == "div" || sel.anchorNode.parentNode.localName == "li") {
+        sel.anchorNode.parentNode.style.fontWeight = "400";
+    } else if (sel.anchorNode.parentNode.localName == "span") {
+        if (sel.anchorNode.parentNode.parentNode.localName == "li") {
+            sel.anchorNode.parentNode.style.fontWeight = "400";
+        }
+        sel.anchorNode.parentNode.style.fontWeight = "400";
     }
 }
 
