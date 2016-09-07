@@ -407,6 +407,13 @@ RE.getTagForParentNode = function(node) {
     }
 };
 
+RE.boldCurrentDiv = function() {
+    var sel = document.getSelection();
+    if (sel.anchorNode.parentNode.localName == "div") {
+        sel.anchorNode.parentNode.style.fontWeight = "900";
+    }
+}
+
 /**
  * If the current selection's parent is an anchor tag, get the href.
  * @returns {string}
