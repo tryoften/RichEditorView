@@ -380,6 +380,10 @@ extension RichEditorView {
         runJS("RE.boldCurrentDiv();")
     }
 
+    public func unboldCurrentDiv() {
+        runJS("RE.unboldCurrentDiv();")
+    }
+
     /**
         Runs some JavaScript on the UIWebView and returns the result
         If there is no result, returns an empty string
