@@ -392,12 +392,12 @@ extension RichEditorView {
         runJS("RE.unitalicCurrentDiv();")
     }
 
-    public func largeboldCurrentDiv() {
-        runJS("RE.largeboldCurrentDiv();")
+    public func largeBoldCurrentDiv() {
+        runJS("RE.largeBoldCurrentDiv();")
     }
 
-    public func unlargeboldCurrentDiv() {
-        runJS("RE.unlargeboldCurrentDiv();")
+    public func unlargeBoldCurrentDiv() {
+        runJS("RE.unlargeBoldCurrentDiv();")
     }
 
     /**
