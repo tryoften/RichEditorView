@@ -549,7 +549,7 @@ RE.getFontSizeForCursor = function() {
     } else {
         return node.parentNode.parentNode.style.fontSize;
     }
-}
+};
 
 RE.getFontStyleForCursor = function() {
     var node = window.getSelection().anchorNode;
@@ -559,7 +559,7 @@ RE.getFontStyleForCursor = function() {
     } else {
         return node.parentNode.parentNode.style.fontStyle;
     }
-}
+};
 
 RE.getFontWeightForCursor = function() {
     var node = window.getSelection().anchorNode;
@@ -569,7 +569,7 @@ RE.getFontWeightForCursor = function() {
     } else {
         return node.parentNode.parentNode.style.fontWeight;
     }
-}
+};
 
 /* Make sure all text nodes are wrapped in divs! */
 
@@ -582,7 +582,7 @@ RE.wrapTextNodes = function() {
             RE.focus();
         }
     }
-}
+};
 
 
 RE.createWrapper = function(elms, node) {
