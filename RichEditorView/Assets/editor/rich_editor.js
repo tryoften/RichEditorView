@@ -414,7 +414,7 @@ RE.boldCurrentDiv = function() {
         }
         parentNodeObject.style.fontWeight = "700";
     }
-}
+};
 
 RE.unboldCurrentDiv = function() {
     var sel = document.getSelection();
@@ -429,7 +429,7 @@ RE.unboldCurrentDiv = function() {
         }
         parentNodeObject.style.fontWeight = "400";
     }
-}
+};
 
 RE.largeBoldCurrentDiv = function() {
     var sel = document.getSelection();
@@ -447,7 +447,7 @@ RE.largeBoldCurrentDiv = function() {
         parentNodeObject.style.fontWeight = "700";
         parentNodeObject.style.fontSize = "large";
     }
-}
+};
 
 RE.unlargeBoldCurrentDiv = function() {
     var sel = document.getSelection();
@@ -465,7 +465,7 @@ RE.unlargeBoldCurrentDiv = function() {
         parentNodeObject.style.fontWeight = "400";
         parentNodeObject.style.fontSize = "medium";
     }
-}
+};
 
 RE.italicCurrentDiv = function() {
     var sel = document.getSelection();
@@ -483,7 +483,7 @@ RE.italicCurrentDiv = function() {
         parentNodeObject.style.fontSize = "x-large";
         parentNodeObject.style.fontStyle = "italic";
     }   
-}
+};
 
 RE.unitalicCurrentDiv = function() {
     var sel = document.getSelection();
@@ -501,7 +501,7 @@ RE.unitalicCurrentDiv = function() {
         parentNodeObject.style.fontSize = "medium";
         parentNodeObject.style.fontStyle = "normal";
     }   
-}
+};
 
 /**
  * If the current selection's parent is an anchor tag, get the href.
