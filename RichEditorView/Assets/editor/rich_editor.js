@@ -410,9 +410,11 @@ RE.getTagForParentNode = function(node) {
 RE.boldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "700";
-    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
+        if (parentNodeObject.id != "editor") {
+            parentNodeObject.style.fontWeight = "700";
+        }
+    } else if (parentNodeObject.localName == "span") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "700";
         }
@@ -423,9 +425,11 @@ RE.boldCurrentDiv = function() {
 RE.unboldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "400";
-    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
+        if (parentNodeObject.id != "editor") {
+            parentNodeObject.style.fontWeight = "400";
+        }
+    } else if (parentNodeObject.localName == "span") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "400";
         }
@@ -436,10 +440,12 @@ RE.unboldCurrentDiv = function() {
 RE.largeBoldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "700";
-        parentNodeObject.style.fontSize = "large";
-    } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
+        if (parentNodeObject.id != "editor") {
+            parentNodeObject.style.fontWeight = "700";
+            parentNodeObject.style.fontSize = "large";
+        }
+    } else if (sel.anchorNode.parentNode.localName == "span") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "700";
             parentNodeObject.parentNode.style.fontSize = "large";
@@ -452,10 +458,12 @@ RE.largeBoldCurrentDiv = function() {
 RE.unlargeBoldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "400";
-        parentNodeObject.style.fontSize = "medium";
-    } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
+        if (parentNodeObject.id != "editor") {
+            parentNodeObject.style.fontWeight = "400";
+            parentNodeObject.style.fontSize = "medium";
+        }
+    } else if (sel.anchorNode.parentNode.localName == "span") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "400";
             parentNodeObject.parentNode.style.fontSize = "medium";
@@ -468,10 +476,12 @@ RE.unlargeBoldCurrentDiv = function() {
 RE.italicCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontSize = "x-large";
-        parentNodeObject.style.fontStyle = "italic";
-    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
+        if (parentNodeObject.id != "editor") {
+            parentNodeObject.style.fontSize = "x-large";
+            parentNodeObject.style.fontStyle = "italic";
+        }
+    } else if (parentNodeObject.localName == "span") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontSize = "x-large";
             parentNodeObject.parentNode.style.fontStyle = "italic";
@@ -484,10 +494,12 @@ RE.italicCurrentDiv = function() {
 RE.unitalicCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontSize = "medium";
-        parentNodeObject.style.fontStyle = "normal";
-    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
+        if (parentNodeObject.id != "editor") {
+            parentNodeObject.style.fontSize = "medium";
+            parentNodeObject.style.fontStyle = "normal";
+        }
+    } else if (parentNodeObject.localName == "span") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontSize = "medium";
             parentNodeObject.parentNode.style.fontStyle = "normal";
