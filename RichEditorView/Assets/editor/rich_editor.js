@@ -442,7 +442,7 @@ RE.largeBoldCurrentDiv = function() {
             sel.anchorNode.parentNode.parentNode.style.fontSize = "large";
         }
         sel.anchorNode.parentNode.style.fontWeight = "700";
-        sel.anchorNode.parentNode.style.fontWeight = "large";
+        sel.anchorNode.parentNode.style.fontSize = "large";
     }
 }
 
