@@ -384,6 +384,22 @@ extension RichEditorView {
         runJS("RE.unboldCurrentDiv();")
     }
 
+    public func italicCurrentDiv() {
+        runJS("RE.italicCurrentDiv();")
+    }
+
+    public func unitalicCurrentDiv() {
+        runJS("RE.unitalicCurrentDiv();")
+    }
+
+    public func largeboldCurrentDiv() {
+        runJS("RE.largeboldCurrentDiv();")
+    }
+
+    public func unlargeboldCurrentDiv() {
+        runJS("RE.unlargeboldCurrentDiv();")
+    }
+
     /**
         Runs some JavaScript on the UIWebView and returns the result
         If there is no result, returns an empty string

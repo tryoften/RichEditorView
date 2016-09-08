@@ -413,7 +413,7 @@ RE.boldCurrentDiv = function() {
         sel.anchorNode.parentNode.style.fontWeight = "700";
     } else if (sel.anchorNode.parentNode.localName == "span") {
         if (sel.anchorNode.parentNode.parentNode.localName == "li") {
-            sel.anchorNode.parentNode.style.fontWeight = "700";
+            sel.anchorNode.parentNode.parentNode.style.fontWeight = "700";
         }
         sel.anchorNode.parentNode.style.fontWeight = "700";
     }
@@ -425,10 +425,70 @@ RE.unboldCurrentDiv = function() {
         sel.anchorNode.parentNode.style.fontWeight = "400";
     } else if (sel.anchorNode.parentNode.localName == "span") {
         if (sel.anchorNode.parentNode.parentNode.localName == "li") {
-            sel.anchorNode.parentNode.style.fontWeight = "400";
+            sel.anchorNode.parentNode.parentNode.style.fontWeight = "400";
         }
         sel.anchorNode.parentNode.style.fontWeight = "400";
     }
+}
+
+RE.largeBoldCurrentDiv = function() {
+    var sel = document.getSelection();
+    if (sel.anchorNode.parentNode.localName == "div" || sel.anchorNode.parentNode.localName == "li") {
+        sel.anchorNode.parentNode.style.fontWeight = "700";
+        sel.anchorNode.parentNode.style.fontSize = "large";
+    } else if (sel.anchorNode.parentNode.localName == "span") {
+        if (sel.anchorNode.parentNode.parentNode.localName == "li") {
+            sel.anchorNode.parentNode.parentNode.style.fontWeight = "700";
+            sel.anchorNode.parentNode.parentNode.style.fontSize = "large";
+        }
+        sel.anchorNode.parentNode.style.fontWeight = "700";
+        sel.anchorNode.parentNode.style.fontWeight = "large";
+    }
+}
+
+RE.unlargeBoldCurrentDiv = function() {
+    var sel = document.getSelection();
+    if (sel.anchorNode.parentNode.localName == "div" || sel.anchorNode.parentNode.localName == "li") {
+        sel.anchorNode.parentNode.style.fontWeight = "400";
+        sel.anchorNode.parentNode.style.fontSize = "medium";
+    } else if (sel.anchorNode.parentNode.localName == "span") {
+        if (sel.anchorNode.parentNode.parentNode.localName == "li") {
+            sel.anchorNode.parentNode.parentNode.style.fontWeight = "400";
+            sel.anchorNode.parentNode.parentNode.style.fontSize = "medium";
+        }
+        sel.anchorNode.parentNode.style.fontWeight = "400";
+        sel.anchorNode.parentNode.style.fontSize = "medium";
+    }
+}
+
+RE.italicCurrentDiv = function() {
+    var sel = document.getSelection();
+    if (sel.anchorNode.parentNode.localName == "div" || sel.anchorNode.parentNode.localName == "li") {
+        sel.anchorNode.parentNode.style.fontSize = "x-large";
+        sel.anchorNode.parentNode.style.fontStyle = "italic";
+    } else if (sel.anchorNode.parentNode.localName == "span") {
+        if (sel.anchorNode.parentNode.parentNode.localName == "li") {
+            sel.anchorNode.parentNode.parentNode.style.fontSize = "x-large";
+            sel.anchorNode.parentNode.parentNode.style.fontStyle = "italic";
+        }
+        sel.anchorNode.parentNode.style.fontSize = "x-large";
+        sel.anchorNode.parentNode.style.fontStyle = "italic";
+    }   
+}
+
+RE.unitalicCurrentDiv = function() {
+    var sel = document.getSelection();
+    if (sel.anchorNode.parentNode.localName == "div" || sel.anchorNode.parentNode.localName == "li") {
+        sel.anchorNode.parentNode.style.fontSize = "medium";
+        sel.anchorNode.parentNode.style.fontStyle = "normal";
+    } else if (sel.anchorNode.parentNode.localName == "span") {
+        if (sel.anchorNode.parentNode.parentNode.localName == "li") {
+            sel.anchorNode.parentNode.parentNode.style.fontSize = "medium";
+            sel.anchorNode.parentNode.parentNode.style.fontStyle = "normal";
+        }
+        sel.anchorNode.parentNode.style.fontSize = "medium";
+        sel.anchorNode.parentNode.style.fontStyle = "normal";
+    }   
 }
 
 /**
