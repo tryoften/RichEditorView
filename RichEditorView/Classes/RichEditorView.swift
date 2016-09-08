@@ -364,6 +364,10 @@ extension RichEditorView {
         }
     }
 
+    public func getStateForTextCursor() -> String? {
+        return runJS("RE.getStateForTextCursor();")
+    }
+
     public func getBoldState() -> String? {
         return runJS("RE.getBoldState();")
     }

@@ -401,12 +401,6 @@ RE.countAnchorTagsInNode = function(node) {
     return RE.getAnchorTagsInNode(node).length;
 };
 
-RE.getTagForParentNode = function(node) {
-    if (node.parentNode != null) {
-        return node.parentNode.localName
-    }
-};
-
 RE.boldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
@@ -518,8 +512,6 @@ RE.getSelectedHref = function() {
     href = '';
     sel = window.getSelection();
 
-    var tag = RE.getTagForParentNode(sel.anchorNode);
-
     try {
         if (window.getSelection) {
             sel = window.getSelection().anchorNode.parentNode.localName;
@@ -531,19 +523,53 @@ RE.getSelectedHref = function() {
     } catch (err) {
         // nothing
     }
-
-    //if more than one link is there, return null
-    if (tags.length > 1) {
-        return null;
-    } else if (tags.length == 1) {
-        href = tags[0];
-    } else {
-        var node = _findNodeByNameInContainer(sel.anchorNode.parentElement, 'A', 'editor');
-        href = node.href;
-    }
-
-    return href ? href : null;
 };
+
+RE.getStateForTextCursor = function() {
+    var fontSize = RE.getFontSizeForCursor();
+    var fontStyle = RE.getFontStyleForCursor();
+    var fontWeight = RE.getFontWeightForCursor();
+
+    if fontSize == "large" {
+        return "largeBold";
+    } else if fontSize == "x-large" {
+        return "italicLarge";
+    } else if fontWeight == "700" {
+        return "bold";
+    } else {
+        return "normal";
+    }
+};
+
+RE.getFontSizeForCursor = function() {
+    var node = window.getSelection().anchorNode;
+
+    if (node.parentNode.style.fontSize != null) {
+        return node.parentNode.style.fontSize;
+    } else {
+        return node.parentNode.parentNode.style.fontSize;
+    }
+}
+
+RE.getFontStyleForCursor = function() {
+    var node = window.getSelection().anchorNode;
+
+    if (node.parentNode.style.fontSize != null) {
+        return node.parentNode.style.fontStyle;
+    } else {
+        return node.parentNode.parentNode.style.fontStyle;
+    }
+}
+
+RE.getFontWeightForCursor = function() {
+    var node = window.getSelection().anchorNode;
+
+    if (node.parentNode.style.fontWeight != null) {
+        return node.parentNode.style.fontWeight;
+    } else {
+        return node.parentNode.parentNode.style.fontWeight;
+    }
+}
 
 /* Make sure all text nodes are wrapped in divs! */
 
