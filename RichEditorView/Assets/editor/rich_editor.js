@@ -412,7 +412,7 @@ RE.boldCurrentDiv = function() {
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
         parentNodeObject.style.fontWeight = "700";
-    } else if (parentNodeObject.localName == "span") {
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "700";
         }
@@ -425,7 +425,7 @@ RE.unboldCurrentDiv = function() {
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
         parentNodeObject.style.fontWeight = "400";
-    } else if (parentNodeObject.localName == "span") {
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "400";
         }
@@ -439,7 +439,7 @@ RE.largeBoldCurrentDiv = function() {
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
         parentNodeObject.style.fontWeight = "700";
         parentNodeObject.style.fontSize = "large";
-    } else if (sel.anchorNode.parentNode.localName == "span") {
+    } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "700";
             parentNodeObject.parentNode.style.fontSize = "large";
@@ -455,7 +455,7 @@ RE.unlargeBoldCurrentDiv = function() {
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
         parentNodeObject.style.fontWeight = "400";
         parentNodeObject.style.fontSize = "medium";
-    } else if (sel.anchorNode.parentNode.localName == "span") {
+    } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "400";
             parentNodeObject.parentNode.style.fontSize = "medium";
@@ -471,7 +471,7 @@ RE.italicCurrentDiv = function() {
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
         parentNodeObject.style.fontSize = "x-large";
         parentNodeObject.style.fontStyle = "italic";
-    } else if (sel.anchorNode.parentNode.localName == "span") {
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontSize = "x-large";
             parentNodeObject.parentNode.style.fontStyle = "italic";
@@ -487,7 +487,7 @@ RE.unitalicCurrentDiv = function() {
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
         parentNodeObject.style.fontSize = "medium";
         parentNodeObject.style.fontStyle = "normal";
-    } else if (sel.anchorNode.parentNode.localName == "span") {
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontSize = "medium";
             parentNodeObject.parentNode.style.fontStyle = "normal";
