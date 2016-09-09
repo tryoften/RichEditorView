@@ -401,14 +401,18 @@ RE.countAnchorTagsInNode = function(node) {
     return RE.getAnchorTagsInNode(node).length;
 };
 
+RE.getTagForParentNode = function(node) {
+    if (node.parentNode != null) {
+        return node.parentNode.localName
+    }
+};
+
 RE.boldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
-        if (parentNodeObject.id != "editor") {
-            parentNodeObject.style.fontWeight = "700";
-        }
-    } else if (parentNodeObject.localName == "span") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
+        parentNodeObject.style.fontWeight = "700";
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "700";
         }
@@ -419,11 +423,9 @@ RE.boldCurrentDiv = function() {
 RE.unboldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
-        if (parentNodeObject.id != "editor") {
-            parentNodeObject.style.fontWeight = "400";
-        }
-    } else if (parentNodeObject.localName == "span") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
+        parentNodeObject.style.fontWeight = "400";
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "400";
         }
@@ -434,12 +436,10 @@ RE.unboldCurrentDiv = function() {
 RE.largeBoldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
-        if (parentNodeObject.id != "editor") {
-            parentNodeObject.style.fontWeight = "700";
-            parentNodeObject.style.fontSize = "large";
-        }
-    } else if (sel.anchorNode.parentNode.localName == "span") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
+        parentNodeObject.style.fontWeight = "700";
+        parentNodeObject.style.fontSize = "large";
+    } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "700";
             parentNodeObject.parentNode.style.fontSize = "large";
@@ -452,12 +452,10 @@ RE.largeBoldCurrentDiv = function() {
 RE.unlargeBoldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
-        if (parentNodeObject.id != "editor") {
-            parentNodeObject.style.fontWeight = "400";
-            parentNodeObject.style.fontSize = "medium";
-        }
-    } else if (sel.anchorNode.parentNode.localName == "span") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
+        parentNodeObject.style.fontWeight = "400";
+        parentNodeObject.style.fontSize = "medium";
+    } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontWeight = "400";
             parentNodeObject.parentNode.style.fontSize = "medium";
@@ -470,12 +468,10 @@ RE.unlargeBoldCurrentDiv = function() {
 RE.italicCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
-        if (parentNodeObject.id != "editor") {
-            parentNodeObject.style.fontSize = "x-large";
-            parentNodeObject.style.fontStyle = "italic";
-        }
-    } else if (parentNodeObject.localName == "span") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
+        parentNodeObject.style.fontSize = "x-large";
+        parentNodeObject.style.fontStyle = "italic";
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontSize = "x-large";
             parentNodeObject.parentNode.style.fontStyle = "italic";
@@ -488,12 +484,10 @@ RE.italicCurrentDiv = function() {
 RE.unitalicCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
-    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font") {
-        if (parentNodeObject.id != "editor") {
-            parentNodeObject.style.fontSize = "medium";
-            parentNodeObject.style.fontStyle = "normal";
-        }
-    } else if (parentNodeObject.localName == "span") {
+    if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
+        parentNodeObject.style.fontSize = "medium";
+        parentNodeObject.style.fontStyle = "normal";
+    } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
             parentNodeObject.parentNode.style.fontSize = "medium";
             parentNodeObject.parentNode.style.fontStyle = "normal";
@@ -512,6 +506,8 @@ RE.getSelectedHref = function() {
     href = '';
     sel = window.getSelection();
 
+    var tag = RE.getTagForParentNode(sel.anchorNode);
+
     try {
         if (window.getSelection) {
             sel = window.getSelection().anchorNode.parentNode.localName;
@@ -523,52 +519,18 @@ RE.getSelectedHref = function() {
     } catch (err) {
         // nothing
     }
-};
 
-RE.getStateForTextCursor = function() {
-    var fontSize = RE.getFontSizeForCursor();
-    var fontStyle = RE.getFontStyleForCursor();
-    var fontWeight = RE.getFontWeightForCursor();
-
-    if fontSize == "large" {
-        return "largeBold";
-    } else if fontSize == "x-large" {
-        return "italicLarge";
-    } else if fontWeight == "700" {
-        return "bold";
+    //if more than one link is there, return null
+    if (tags.length > 1) {
+        return null;
+    } else if (tags.length == 1) {
+        href = tags[0];
     } else {
-        return "normal";
+        var node = _findNodeByNameInContainer(sel.anchorNode.parentElement, 'A', 'editor');
+        href = node.href;
     }
-};
 
-RE.getFontSizeForCursor = function() {
-    var node = window.getSelection().anchorNode;
-
-    if (node.parentNode.style.fontSize != null) {
-        return node.parentNode.style.fontSize;
-    } else {
-        return node.parentNode.parentNode.style.fontSize;
-    }
-};
-
-RE.getFontStyleForCursor = function() {
-    var node = window.getSelection().anchorNode;
-
-    if (node.parentNode.style.fontSize != null) {
-        return node.parentNode.style.fontStyle;
-    } else {
-        return node.parentNode.parentNode.style.fontStyle;
-    }
-};
-
-RE.getFontWeightForCursor = function() {
-    var node = window.getSelection().anchorNode;
-
-    if (node.parentNode.style.fontWeight != null) {
-        return node.parentNode.style.fontWeight;
-    } else {
-        return node.parentNode.parentNode.style.fontWeight;
-    }
+    return href ? href : null;
 };
 
 /* Make sure all text nodes are wrapped in divs! */
@@ -582,7 +544,7 @@ RE.wrapTextNodes = function() {
             RE.focus();
         }
     }
-};
+}
 
 
 RE.createWrapper = function(elms, node) {
