@@ -497,6 +497,52 @@ RE.unitalicCurrentDiv = function() {
     }   
 };
 
+RE.getFontSizeForCursor = function() {
+    var node = window.getSelection().anchorNode;
+    
+    if (node.parentNode.style.fontSize != null) {
+        return node.parentNode.style.fontSize;
+    } else {
+        return node.parentNode.parentNode.style.fontSize;
+    }
+};
+
+RE.getFontStyleForCursor = function() {
+    var node = window.getSelection().anchorNode;
+    
+    if (node.parentNode.style.fontSize != null) {
+        return node.parentNode.style.fontStyle;
+    } else {
+        return node.parentNode.parentNode.style.fontStyle;
+    }
+};
+
+RE.getFontWeightForCursor = function() {
+    var node = window.getSelection().anchorNode;
+    
+    if (node.parentNode.style.fontWeight != null) {
+        return node.parentNode.style.fontWeight;
+    } else {
+        return node.parentNode.parentNode.style.fontWeight;
+    }
+};
+
+RE.getStateForTextCursor = function() {
+    var fontSize = RE.getFontSizeForCursor();
+    var fontStyle = RE.getFontStyleForCursor();
+    var fontWeight = RE.getFontWeightForCursor();
+    
+    if (fontSize == "large") {
+        return "largeBold";
+    } else if (fontSize == "x-large") {
+        return "italicLarge";
+    } else if (fontWeight == "700") {
+        return "bold";
+    } else {
+        return "normal";
+    }
+};
+
 /**
  * If the current selection's parent is an anchor tag, get the href.
  * @returns {string}

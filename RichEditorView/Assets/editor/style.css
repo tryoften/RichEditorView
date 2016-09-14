@@ -61,3 +61,48 @@ div {
     line-height:28px;
     font-size: 12pt;
 }
+
+.TEXT-ZERO {
+    font-weight: 400;
+    font-size: 12pt;
+}
+
+.TEXT-ONE {
+    font-weight: 700;
+    font-size: 12pt;
+}
+
+.TEXT-TWO {
+    font-weight: 700;
+    font-size: 30pt;
+}
+
+.QUOTES-ZERO {
+    font-weight: 400;
+    font-style: 'normal';
+    font-size: 12pt;
+}
+
+.QUOTES-ONE {
+    font-style: italic;
+    opacity: .5;
+    text-indent: 40px;
+    font-size: 24pt;
+}
+
+.DIVIDER {
+    text-align: center;
+}
+
+.image-small {
+    width: 20px;
+    height: 20px;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
