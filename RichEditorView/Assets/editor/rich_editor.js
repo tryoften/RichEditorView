@@ -634,3 +634,148 @@ RE.getRelativeCaretYPosition = function() {
 
     return y;
 };
+
+// Jakub Content Methods
+
+let MAX_WIDTH = 135;
+let MAX_HEIGHT = 130;
+
+function resizeImage(img: any): any {
+    const { width, height, src } = img;
+    let newImg = {} as any;
+
+    if (width > height) {
+        const newHeight = getSmallUknown(MAX_WIDTH, img.width, img.height);
+        newImg.height = newHeight;
+        newImg.width = MAX_WIDTH;
+
+    } else if (width < height) {
+        const newWidth = getSmallUknown(MAX_HEIGHT, img.height, img.width);
+        newImg.height = MAX_HEIGHT;
+        newImg.width = newWidth;
+    } else {
+        newImg.height = MAX_HEIGHT;
+        newImg.width = MAX_HEIGHT;
+    }
+    return newImg;
+
+}
+
+function getSmallUknown(xs: number, xl: number, yl: number) {
+    return Math.ceil( ( xs / xl ) * yl );
+}
+
+
+function appendListItem(root, entry, type) {
+    let lastItem = root.lastChild;
+    let oppositeType = (type == 'UL') ? 'OL': 'UL';
+    if(!lastItem || (lastItem.nodeName == 'DIV' || lastItem.nodeName == oppositeType)) {
+        //if unstyled, create new list
+        let newList = document.createElement(type);
+
+        let li = document.createElement('li');
+        li.appendChild(convertEntryToHTML(entry));
+        newList.appendChild(li);
+        root.appendChild(newList);
+
+
+    } else {
+        //unordered list item
+        let newItem = document.createElement('li');
+        newItem.appendChild(convertEntryToHTML(entry));
+        lastItem.appendChild(newItem);
+    }
+
+}
+function convertEntryToHTML(entry) {
+
+    let element = document.createElement('div');
+    let id = document.createAttribute('id');
+    id.value = entry.key;
+    element.setAttributeNode(id);
+
+    if(entry.meta && entry.meta.format === 'divider') {
+        let inlineStyle = document.createAttribute('class');
+        inlineStyle.value = "DIVIDER";
+        element.setAttributeNode(inlineStyle);
+
+        let innerImg = document.createElement('img');
+        let src = document.createAttribute('src');
+        src.value = "https://firebasestorage.googleapis.com/v0/b/firebase-often-dev.appspot.com/o/images%2Fusers%2Fkomran%2Flinebreak%403x.png?alt=media&amp;token=f7bda5c0-6cd2-4d35-825f-2c5f8e132044";
+        let alt = document.createAttribute('alt');
+        alt.value = 'linebreak';
+        innerImg.setAttributeNode(src);
+        innerImg.setAttributeNode(alt);
+
+        element.appendChild(innerImg);
+
+    } else if(entry.meta && entry.meta.format === 'image') {
+        let orientation = entry.meta.orientation || 'left';
+        let inlineStyle = document.createAttribute('class');
+        inlineStyle.value = 'IMAGE align-'+ orientation;
+        element.setAttributeNode(inlineStyle);
+
+        let innerImg = document.createElement('img');
+        let src = document.createAttribute('src');
+        src.value = entry.meta.href || "";
+        innerImg.setAttributeNode(src);
+
+        let style = document.createAttribute('style');
+        let image = {
+            height: entry.meta.height || MAX_HEIGHT,
+            width: entry.meta.width || MAX_WIDTH
+        };
+        let resizedImage = resizeImage(image);
+        style.value = "font-size: 12pt; -webkit-text-size-adjust: 100%;";
+        innerImg.setAttributeNode(style);
+
+        //Set original height and width
+        let originalWidth = document.createAttribute('data-originalWidth');
+        originalWidth.value = image.width;
+        innerImg.setAttributeNode(originalWidth);
+
+        let originalHeight = document.createAttribute('data-originalHeight');
+        originalHeight.value = image.height;
+        innerImg.setAttributeNode(originalHeight);
+
+        let orientationAtt = document.createAttribute('data-orientation');
+        orientationAtt.value = orientation;
+        innerImg.setAttributeNode(orientationAtt);
+
+        let width = document.createAttribute('width');
+        width.value = resizedImage.width;
+        innerImg.setAttributeNode(width);
+
+        let height = document.createAttribute('height');
+        height.value = resizedImage.height;
+        innerImg.setAttributeNode(height);
+
+        element.appendChild(innerImg);
+
+    } else {
+        let inlineStyle = document.createAttribute('class');
+        inlineStyle.value = entry.inlineStyle;
+        element.setAttributeNode(inlineStyle);
+
+        element.innerHTML = entry.text;
+
+    }
+    return element;
+
+}
+
+function convertEntriesToHTML(entries) {
+    let root = document.createElement('div');
+    for (let entry of entries) {
+        if (entry.listStyle === 'unordered-list-item') {
+            appendListItem(root, entry, 'UL');
+        } else if (entry.listStyle === 'ordered-list-item') {
+            appendListItem(root, entry, 'OL');
+        } else {
+            //unstyled
+            root.appendChild(convertEntryToHTML(entry));
+            root.appendChild(document.createElement('br'));
+        }
+    }
+    return root;
+}
