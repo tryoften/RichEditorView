@@ -637,12 +637,12 @@ RE.getRelativeCaretYPosition = function() {
 
 // Jakub Content Methods
 
-let MAX_WIDTH = 135;
-let MAX_HEIGHT = 130;
+var MAX_WIDTH = 135;
+var MAX_HEIGHT = 130;
 
-function resizeImage(img: any): any {
+RE.resizeImage = function(img) {
     const { width, height, src } = img;
-    let newImg = {} as any;
+    var newImg = {} as any;
 
     if (width > height) {
         const newHeight = getSmallUknown(MAX_WIDTH, img.width, img.height);
@@ -659,21 +659,21 @@ function resizeImage(img: any): any {
     }
     return newImg;
 
-}
+};
 
-function getSmallUknown(xs: number, xl: number, yl: number) {
+RE.getSmallUknown = function(xs, xl, yl) {
     return Math.ceil( ( xs / xl ) * yl );
-}
+};
 
 
-function appendListItem(root, entry, type) {
-    let lastItem = root.lastChild;
-    let oppositeType = (type == 'UL') ? 'OL': 'UL';
+RE.appendListItem = function (root, entry, type) {
+    var lastItem = root.lastChild;
+    var oppositeType = (type == 'UL') ? 'OL': 'UL';
     if(!lastItem || (lastItem.nodeName == 'DIV' || lastItem.nodeName == oppositeType)) {
         //if unstyled, create new list
-        let newList = document.createElement(type);
+        var newList = document.createElement(type);
 
-        let li = document.createElement('li');
+        var li = document.createElement('li');
         li.appendChild(convertEntryToHTML(entry));
         newList.appendChild(li);
         root.appendChild(newList);
@@ -681,28 +681,28 @@ function appendListItem(root, entry, type) {
 
     } else {
         //unordered list item
-        let newItem = document.createElement('li');
+        var newItem = document.createElement('li');
         newItem.appendChild(convertEntryToHTML(entry));
         lastItem.appendChild(newItem);
     }
 
-}
-function convertEntryToHTML(entry) {
+};
 
-    let element = document.createElement('div');
-    let id = document.createAttribute('id');
+RE.convertEntryToHTML = function(entry) {
+    var element = document.createElement('div');
+    var id = document.createAttribute('id');
     id.value = entry.key;
     element.setAttributeNode(id);
 
     if(entry.meta && entry.meta.format === 'divider') {
-        let inlineStyle = document.createAttribute('class');
+        var inlineStyle = document.createAttribute('class');
         inlineStyle.value = "DIVIDER";
         element.setAttributeNode(inlineStyle);
 
-        let innerImg = document.createElement('img');
-        let src = document.createAttribute('src');
+        var innerImg = document.createElement('img');
+        var src = document.createAttribute('src');
         src.value = "https://firebasestorage.googleapis.com/v0/b/firebase-often-dev.appspot.com/o/images%2Fusers%2Fkomran%2Flinebreak%403x.png?alt=media&amp;token=f7bda5c0-6cd2-4d35-825f-2c5f8e132044";
-        let alt = document.createAttribute('alt');
+        var alt = document.createAttribute('alt');
         alt.value = 'linebreak';
         innerImg.setAttributeNode(src);
         innerImg.setAttributeNode(alt);
@@ -710,50 +710,50 @@ function convertEntryToHTML(entry) {
         element.appendChild(innerImg);
 
     } else if(entry.meta && entry.meta.format === 'image') {
-        let orientation = entry.meta.orientation || 'left';
-        let inlineStyle = document.createAttribute('class');
+        var orientation = entry.meta.orientation || 'left';
+        var inlineStyle = document.createAttribute('class');
         inlineStyle.value = 'IMAGE align-'+ orientation;
         element.setAttributeNode(inlineStyle);
 
-        let innerImg = document.createElement('img');
-        let src = document.createAttribute('src');
+        var innerImg = document.createElement('img');
+        var src = document.createAttribute('src');
         src.value = entry.meta.href || "";
         innerImg.setAttributeNode(src);
 
-        let style = document.createAttribute('style');
-        let image = {
+        var style = document.createAttribute('style');
+        var image = {
             height: entry.meta.height || MAX_HEIGHT,
             width: entry.meta.width || MAX_WIDTH
         };
-        let resizedImage = resizeImage(image);
+        var resizedImage = resizeImage(image);
         style.value = "font-size: 12pt; -webkit-text-size-adjust: 100%;";
         innerImg.setAttributeNode(style);
 
         //Set original height and width
-        let originalWidth = document.createAttribute('data-originalWidth');
+        var originalWidth = document.createAttribute('data-originalWidth');
         originalWidth.value = image.width;
         innerImg.setAttributeNode(originalWidth);
 
-        let originalHeight = document.createAttribute('data-originalHeight');
+        var originalHeight = document.createAttribute('data-originalHeight');
         originalHeight.value = image.height;
         innerImg.setAttributeNode(originalHeight);
 
-        let orientationAtt = document.createAttribute('data-orientation');
+        var orientationAtt = document.createAttribute('data-orientation');
         orientationAtt.value = orientation;
         innerImg.setAttributeNode(orientationAtt);
 
-        let width = document.createAttribute('width');
+        var width = document.createAttribute('width');
         width.value = resizedImage.width;
         innerImg.setAttributeNode(width);
 
-        let height = document.createAttribute('height');
+        var height = document.createAttribute('height');
         height.value = resizedImage.height;
         innerImg.setAttributeNode(height);
 
         element.appendChild(innerImg);
 
     } else {
-        let inlineStyle = document.createAttribute('class');
+        var inlineStyle = document.createAttribute('class');
         inlineStyle.value = entry.inlineStyle;
         element.setAttributeNode(inlineStyle);
 
@@ -762,11 +762,11 @@ function convertEntryToHTML(entry) {
     }
     return element;
 
-}
+};
 
 function convertEntriesToHTML(entries) {
-    let root = document.createElement('div');
-    for (let entry of entries) {
+    var root = document.createElement('div');
+    for (var entry of entries) {
         if (entry.listStyle === 'unordered-list-item') {
             appendListItem(root, entry, 'UL');
         } else if (entry.listStyle === 'ordered-list-item') {
@@ -778,4 +778,4 @@ function convertEntriesToHTML(entries) {
         }
     }
     return root;
-}
+};
