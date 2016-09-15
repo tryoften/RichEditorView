@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- "use strict";
+"use strict";
 
 var RE = {};
 
@@ -25,8 +25,8 @@ RE.editor = document.getElementById('editor');
 
 // Not universally supported, but seems to work in iOS 7 and 8
 document.addEventListener("selectionchange", function() {
-    RE.backuprange();
-});
+                          RE.backuprange();
+                          });
 
 //looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {
@@ -48,20 +48,20 @@ RE.rangeOrCaretSelectionExists = function() {
 };
 
 RE.editor.addEventListener("input", function() {
-    RE.updatePlaceholder();
-    RE.backuprange();
-    RE.wrapTextNodes();
-    RE.callback("input");
-});
+                           RE.updatePlaceholder();
+                           RE.backuprange();
+                           RE.wrapTextNodes();
+                           RE.callback("input");
+                           });
 
 RE.editor.addEventListener("focus", function() {
-    RE.backuprange();
-    RE.callback("focus");
-});
+                           RE.backuprange();
+                           RE.callback("focus");
+                           });
 
 RE.editor.addEventListener("blur", function() {
-    RE.callback("blur");
-});
+                           RE.callback("blur");
+                           });
 
 RE.customAction = function(action) {
     RE.callback("action/" + action);
@@ -76,10 +76,10 @@ RE.runCallbackQueue = function() {
     if (RE.callbackQueue.length === 0) {
         return;
     }
-
+    
     setTimeout(function() {
-        window.location.href = "re-callback://";
-    }, 0);
+               window.location.href = "re-callback://";
+               }, 0);
 };
 
 RE.getCommandQueue = function() {
@@ -97,11 +97,11 @@ RE.setHtml = function(contents) {
     var tempWrapper = document.createElement('div');
     tempWrapper.innerHTML = contents;
     var images = tempWrapper.querySelectorAll("img");
-
+    
     for (var i = 0; i < images.length; i++) {
         images[i].onload = RE.updateHeight;
     }
-
+    
     RE.editor.innerHTML = tempWrapper.innerHTML;
     RE.updatePlaceholder();
 };
@@ -241,7 +241,7 @@ RE.insertImage = function(url, alt) {
     img.setAttribute("src", url);
     img.setAttribute("alt", alt);
     img.onload = RE.updateHeight;
-
+    
     RE.insertHTML(img.outerHTML);
     RE.callback("input");
 };
@@ -260,11 +260,11 @@ RE.insertLink = function(url, title) {
     var sel = document.getSelection();
     if (sel.toString().length !== 0) {
         if (sel.rangeCount) {
-
+            
             var el = document.createElement("a");
             el.setAttribute("href", url);
             el.setAttribute("title", title);
-
+            
             var range = sel.getRangeAt(0).cloneRange();
             range.surroundContents(el);
             sel.removeAllRanges();
@@ -368,8 +368,8 @@ RE.getElementFontSize = function() {
 }
 
 /**
-Recursively search element ancestors to find a element nodeName e.g. A
-**/
+ Recursively search element ancestors to find a element nodeName e.g. A
+ **/
 var _findNodeByNameInContainer = function(element, nodeName, rootElementId) {
     if (element.nodeName == nodeName) {
         return element;
@@ -387,7 +387,7 @@ var isAnchorNode = function(node) {
 
 RE.getAnchorTagsInNode = function(node) {
     var links = [];
-
+    
     while (node.nextSibling !== null && node.nextSibling !== undefined) {
         node = node.nextSibling;
         if (isAnchorNode(node)) {
@@ -478,7 +478,7 @@ RE.italicCurrentDiv = function() {
         }
         parentNodeObject.style.fontSize = "x-large";
         parentNodeObject.style.fontStyle = "italic";
-    }   
+    }
 };
 
 RE.unitalicCurrentDiv = function() {
@@ -494,7 +494,7 @@ RE.unitalicCurrentDiv = function() {
         }
         parentNodeObject.style.fontSize = "medium";
         parentNodeObject.style.fontStyle = "normal";
-    }   
+    }
 };
 
 RE.getFontSizeForCursor = function() {
@@ -551,9 +551,9 @@ RE.getSelectedHref = function() {
     var href, sel;
     href = '';
     sel = window.getSelection();
-
+    
     var tag = RE.getTagForParentNode(sel.anchorNode);
-
+    
     try {
         if (window.getSelection) {
             sel = window.getSelection().anchorNode.parentNode.localName;
@@ -565,7 +565,7 @@ RE.getSelectedHref = function() {
     } catch (err) {
         // nothing
     }
-
+    
     //if more than one link is there, return null
     if (tags.length > 1) {
         return null;
@@ -575,7 +575,7 @@ RE.getSelectedHref = function() {
         var node = _findNodeByNameInContainer(sel.anchorNode.parentElement, 'A', 'editor');
         href = node.href;
     }
-
+    
     return href ? href : null;
 };
 
@@ -599,7 +599,7 @@ RE.createWrapper = function(elms, node) {
     
     var parent  = el.parentNode;
     var sibling = el.nextSibling;
-
+    
     child.appendChild(el);
     
     if (sibling) {
@@ -631,7 +631,7 @@ RE.getRelativeCaretYPosition = function() {
             }
         }
     }
-
+    
     return y;
 };
 
@@ -641,16 +641,16 @@ var MAX_WIDTH = 135;
 var MAX_HEIGHT = 130;
 
 RE.resizeImage = function(img) {
-    const { width, height, src } = img;
-    var newImg = {} as any;
-
+    var { width, height, src } = img;
+    var newImg = {};
+    
     if (width > height) {
-        const newHeight = getSmallUknown(MAX_WIDTH, img.width, img.height);
+        var newHeight = getSmallUknown(MAX_WIDTH, img.width, img.height);
         newImg.height = newHeight;
         newImg.width = MAX_WIDTH;
-
+        
     } else if (width < height) {
-        const newWidth = getSmallUknown(MAX_HEIGHT, img.height, img.width);
+        var newWidth = getSmallUknown(MAX_HEIGHT, img.height, img.width);
         newImg.height = MAX_HEIGHT;
         newImg.width = newWidth;
     } else {
@@ -658,7 +658,7 @@ RE.resizeImage = function(img) {
         newImg.width = MAX_HEIGHT;
     }
     return newImg;
-
+    
 };
 
 RE.getSmallUknown = function(xs, xl, yl) {
@@ -672,20 +672,17 @@ RE.appendListItem = function (root, entry, type) {
     if(!lastItem || (lastItem.nodeName == 'DIV' || lastItem.nodeName == oppositeType)) {
         //if unstyled, create new list
         var newList = document.createElement(type);
-
+        
         var li = document.createElement('li');
         li.appendChild(convertEntryToHTML(entry));
         newList.appendChild(li);
         root.appendChild(newList);
-
-
     } else {
         //unordered list item
         var newItem = document.createElement('li');
         newItem.appendChild(convertEntryToHTML(entry));
         lastItem.appendChild(newItem);
     }
-
 };
 
 RE.convertEntryToHTML = function(entry) {
@@ -693,12 +690,12 @@ RE.convertEntryToHTML = function(entry) {
     var id = document.createAttribute('id');
     id.value = entry.key;
     element.setAttributeNode(id);
-
+    
     if(entry.meta && entry.meta.format === 'divider') {
         var inlineStyle = document.createAttribute('class');
         inlineStyle.value = "DIVIDER";
         element.setAttributeNode(inlineStyle);
-
+        
         var innerImg = document.createElement('img');
         var src = document.createAttribute('src');
         src.value = "https://firebasestorage.googleapis.com/v0/b/firebase-often-dev.appspot.com/o/images%2Fusers%2Fkomran%2Flinebreak%403x.png?alt=media&amp;token=f7bda5c0-6cd2-4d35-825f-2c5f8e132044";
@@ -706,76 +703,77 @@ RE.convertEntryToHTML = function(entry) {
         alt.value = 'linebreak';
         innerImg.setAttributeNode(src);
         innerImg.setAttributeNode(alt);
-
+        
         element.appendChild(innerImg);
-
+        
     } else if(entry.meta && entry.meta.format === 'image') {
         var orientation = entry.meta.orientation || 'left';
         var inlineStyle = document.createAttribute('class');
         inlineStyle.value = 'IMAGE align-'+ orientation;
         element.setAttributeNode(inlineStyle);
-
+        
         var innerImg = document.createElement('img');
         var src = document.createAttribute('src');
         src.value = entry.meta.href || "";
         innerImg.setAttributeNode(src);
-
+        
         var style = document.createAttribute('style');
         var image = {
-            height: entry.meta.height || MAX_HEIGHT,
-            width: entry.meta.width || MAX_WIDTH
+        height: entry.meta.height || MAX_HEIGHT,
+        width: entry.meta.width || MAX_WIDTH
         };
         var resizedImage = resizeImage(image);
         style.value = "font-size: 12pt; -webkit-text-size-adjust: 100%;";
         innerImg.setAttributeNode(style);
-
+        
         //Set original height and width
         var originalWidth = document.createAttribute('data-originalWidth');
         originalWidth.value = image.width;
         innerImg.setAttributeNode(originalWidth);
-
+        
         var originalHeight = document.createAttribute('data-originalHeight');
         originalHeight.value = image.height;
         innerImg.setAttributeNode(originalHeight);
-
+        
         var orientationAtt = document.createAttribute('data-orientation');
         orientationAtt.value = orientation;
         innerImg.setAttributeNode(orientationAtt);
-
+        
         var width = document.createAttribute('width');
         width.value = resizedImage.width;
         innerImg.setAttributeNode(width);
-
+        
         var height = document.createAttribute('height');
         height.value = resizedImage.height;
         innerImg.setAttributeNode(height);
-
+        
         element.appendChild(innerImg);
-
+        
     } else {
         var inlineStyle = document.createAttribute('class');
         inlineStyle.value = entry.inlineStyle;
         element.setAttributeNode(inlineStyle);
-
+        
         element.innerHTML = entry.text;
-
+        
     }
     return element;
-
+    
 };
 
-function convertEntriesToHTML(entries) {
+RE.convertEntriesToHTML = function(entries) {
     var root = document.createElement('div');
     for (var entry of entries) {
         if (entry.listStyle === 'unordered-list-item') {
-            appendListItem(root, entry, 'UL');
+            RE.appendListItem(root, entry, 'UL');
         } else if (entry.listStyle === 'ordered-list-item') {
-            appendListItem(root, entry, 'OL');
+            RE.appendListItem(root, entry, 'OL');
         } else {
             //unstyled
             root.appendChild(convertEntryToHTML(entry));
             root.appendChild(document.createElement('br'));
         }
     }
-    return root;
+    
+    RE.setHTML(root);
 };

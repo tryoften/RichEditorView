@@ -404,6 +404,10 @@ extension RichEditorView {
         runJS("RE.unlargeBoldCurrentDiv();")
     }
 
+    public func convertEntriesToHTML(entries: [ContentEntry]) {
+        runJS("RE.convertEntriesToHTML(\(entries));")
+    }
+
     /**
         Runs some JavaScript on the UIWebView and returns the result
         If there is no result, returns an empty string
