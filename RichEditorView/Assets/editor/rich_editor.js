@@ -645,12 +645,12 @@ RE.resizeImage = function(img) {
     var newImg = {};
     
     if (width > height) {
-        var newHeight = getSmallUknown(MAX_WIDTH, img.width, img.height);
+        var newHeight = RE.getSmallUknown(MAX_WIDTH, img.width, img.height);
         newImg.height = newHeight;
         newImg.width = MAX_WIDTH;
         
     } else if (width < height) {
-        var newWidth = getSmallUknown(MAX_HEIGHT, img.height, img.width);
+        var newWidth = RE.getSmallUknown(MAX_HEIGHT, img.height, img.width);
         newImg.height = MAX_HEIGHT;
         newImg.width = newWidth;
     } else {
@@ -674,13 +674,13 @@ RE.appendListItem = function (root, entry, type) {
         var newList = document.createElement(type);
         
         var li = document.createElement('li');
-        li.appendChild(convertEntryToHTML(entry));
+        li.appendChild(RE.convertEntryToHTML(entry));
         newList.appendChild(li);
         root.appendChild(newList);
     } else {
         //unordered list item
         var newItem = document.createElement('li');
-        newItem.appendChild(convertEntryToHTML(entry));
+        newItem.appendChild(RE.convertEntryToHTML(entry));
         lastItem.appendChild(newItem);
     }
 };
@@ -722,7 +722,7 @@ RE.convertEntryToHTML = function(entry) {
         height: entry.meta.height || MAX_HEIGHT,
         width: entry.meta.width || MAX_WIDTH
         };
-        var resizedImage = resizeImage(image);
+        var resizedImage = RE.resizeImage(image);
         style.value = "font-size: 12pt; -webkit-text-size-adjust: 100%;";
         innerImg.setAttributeNode(style);
         
@@ -770,7 +770,7 @@ RE.convertEntriesToHTML = function(entries) {
             RE.appendListItem(root, entry, 'OL');
         } else {
             //unstyled
-            root.appendChild(convertEntryToHTML(entry));
+            root.appendChild(RE.convertEntryToHTML(entry));
             root.appendChild(document.createElement('br'));
         }
     }
