@@ -7,6 +7,21 @@
 
 import UIKit
 
+public struct ContentEntry {
+    var inlineStyle: String = ""
+    var listStyle: String = ""
+    var key: String = ""
+    var text: String = ""
+    var meta: AnyObject?
+    
+    init(inlineStyle: String, listStyle: String, key: String, text: String) {
+        self.inlineStyle = inlineStyle
+        self.listStyle = listStyle
+        self.key = key
+        self.text = text
+    }
+}
+
 /**
     RichEditorDelegate defines callbacks for the delegate of the RichEditorView
 */
@@ -404,8 +419,19 @@ extension RichEditorView {
         runJS("RE.unlargeBoldCurrentDiv();")
     }
 
-    public func convertEntriesToHTML(entries: [ContentEntry]) {
-        runJS("RE.convertEntriesToHTML(\(entries));")
+    public func convertEntriesToHTML(entry: [String:String]) {
+        if let inlineStyle = entry["inlineStyle"],
+            let key = entry["key"],
+            let listStyle = entry["listStyle"],
+            let text = entry["text"] {
+            let entry = [
+                "inlineStyle": inlineStyle,
+                "key": key,
+                "text": text,
+                "listStyle": listStyle
+            ]
+            runJS("RE.convertEntriesToHTML(\(entry));")
+        }
     }
 
     /**
