@@ -115,7 +115,7 @@ public class RichEditorView: UIView {
     */
     public private(set) var placeholder: String = ""
 
-    private var editorLoaded = false
+    private var editorLoaded = false;
     
     /**
         The internal height of the text being displayed.
@@ -198,10 +198,12 @@ extension RichEditorView {
 
 
     public func setHTML(html: String) {
-        contentHTML = html
+        contentHTML = html;
         if editorLoaded {
             runJS("RE.setHtml('\(escape(html))');")
             updateHeight()
+        } else {
+            print("not loaded in set html");
         }
     }
     
@@ -418,19 +420,29 @@ extension RichEditorView {
     public func unlargeBoldCurrentDiv() {
         runJS("RE.unlargeBoldCurrentDiv();")
     }
+    
+    public func getEntries() {
+        if editorLoaded {
+            print("loaded editor");
+            let myEntries = runJS("RE.testing();")
+            print(myEntries);
+            updateHeight()
+        } else {
+            print("not loaded in get html");
+        }
+    }
 
-    public func convertEntriesToHTML(entry: [String:String]) {
-        if let inlineStyle = entry["inlineStyle"],
-            let key = entry["key"],
-            let listStyle = entry["listStyle"],
-            let text = entry["text"] {
-            let entry = [
-                "inlineStyle": inlineStyle,
-                "key": key,
-                "text": text,
-                "listStyle": listStyle
-            ]
-            runJS("RE.convertEntriesToHTML(\(entry));")
+    public func convertEntriesToHTML(entries: [[String:AnyObject]]) {
+        for entry in entries {
+            do {
+                let data = try NSJSONSerialization.dataWithJSONObject(entries, options: NSJSONWritingOptions())
+                let allInfoJSONString = NSString(data: data, encoding: NSUTF8StringEncoding)!
+                let stuff = runJS("RE.convertEntriesToHTML('\(allInfoJSONString)');")
+                setHTML(stuff);
+                
+            } catch let error as NSError {
+                print(error)
+            }
         }
     }
 
@@ -649,6 +661,7 @@ extension RichEditorView {
     */
     private func performCommand(method: String) {
         if method.hasPrefix("ready") {
+            print("readymade");
             // If loading for the first time, we have to set the content HTML to be displayed
             if !editorLoaded {
                 editorLoaded = true

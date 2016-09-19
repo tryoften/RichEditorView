@@ -757,11 +757,12 @@ RE.convertEntryToHTML = function(entry) {
         element.innerHTML = entry.text;
         
     }
-    return element;
-    
+    return element
 };
 
-RE.convertEntriesToHTML = function(entries) {
+
+RE.convertEntriesToHTML = function(entryJSON) {
+    var entries = JSON.parse(entryJSON);
     var root = document.createElement('div');
     for (var entry of entries) {
         if (entry.listStyle === 'unordered-list-item') {
@@ -771,9 +772,8 @@ RE.convertEntriesToHTML = function(entries) {
         } else {
             //unstyled
             root.appendChild(RE.convertEntryToHTML(entry));
-            root.appendChild(document.createElement('br'));
+            //root.appendChild(document.createElement('br'));
         }
     }
-    
-    RE.setHTML(root);
+    return root.innerHTML;
 };
