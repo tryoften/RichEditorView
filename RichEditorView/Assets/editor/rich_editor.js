@@ -780,7 +780,7 @@ RE.convertEntriesToHTML = function(entryJSON) {
 
 RE.convertHTMLToEntries = function() {
     var contents = [];
-    var childNodes = document.getElementById('editor').childNodes;
+    var childNodes = document.getElementById("editor").childNodes;
     for (var i = 0; i < childNodes.length; i++) {
         var child = childNodes[i];
         if (child.nodeName == 'BR') {
@@ -795,12 +795,12 @@ RE.convertHTMLToEntries = function() {
                 if (li.nodeName == 'BR') {
                     continue;
                 }
-                contents.push(convertDivsToContentEntries(li.lastChild, listStyle));
+                contents.push(RE.convertDivsToContentEntries(li.lastChild, listStyle));
             }
         }
         
         if (child.nodeName == 'DIV') {
-            contents.push(convertDivsToContentEntries(child, 'unstyled'));
+            contents.push(RE.convertDivsToContentEntries(child, 'unstyled'));
         }
     }
     return JSON.stringify(contents);
