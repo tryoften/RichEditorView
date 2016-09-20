@@ -445,6 +445,10 @@ extension RichEditorView {
             }
         }
     }
+    
+    public func convertHTMLToEntries() -> String? {
+        return runJS("RE.convertHTMLToEntries();")
+    }
 
     /**
         Runs some JavaScript on the UIWebView and returns the result

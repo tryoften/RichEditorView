@@ -777,3 +777,62 @@ RE.convertEntriesToHTML = function(entryJSON) {
     }
     return root.innerHTML;
 };
+
+RE.convertHTMLToEntries = function(root) {
+    var contents = [];
+    var childNodes = root.childNodes;
+    for (var i = 0; i < childNodes.length; i++) {
+        var child = childNodes[i];
+        if (child.nodeName == 'BR') {
+            continue;
+        }
+        
+        if (child.nodeName == 'OL' || child.nodeName == 'UL') {
+            var liElements = child.childNodes;
+            var listStyle = (child.nodeName == 'OL') ? 'ordered-list-item' : 'unordered-list-item';
+            for (var j = 0; j < liElements.length; j++) {
+                var li = liElements[j];
+                if (li.nodeName == 'BR') {
+                    continue;
+                }
+                contents.push(convertDivsToContentEntries(li.lastChild, listStyle));
+            }
+        }
+        
+        if (child.nodeName == 'DIV') {
+            contents.push(convertDivsToContentEntries(child, 'unstyled'));
+        }
+    }
+    return contents;
+};
+
+
+RE.convertDivsToContentEntries = function(node, listStyle) {
+    var contentEntry = {
+        key: node.id,
+        listStyle: listStyle
+    };
+    
+    if(node.className.startsWith('DIVIDER')){
+        // Divider code
+        contentEntry.inlineStyle = "";
+        contentEntry.meta = {
+            format: 'divider'
+        };
+    } else if(node.className.startsWith('IMAGE')) {
+        var imageContents = node.lastChild;
+        contentEntry.inlineStyle = "";
+        contentEntry.meta = {
+            format: 'image',
+            orientation: imageContents.getAttribute('data-orientation'),
+            href: imageContents.src,
+            height: imageContents.getAttribute('data-originalHeight'),
+            width: imageContents.getAttribute('data-originalWidth')
+        };
+    } else {
+        // regular text
+        contentEntry.inlineStyle = node.className;
+        contentEntry.text = node.textContent;
+    }
+    return contentEntry;
+};
