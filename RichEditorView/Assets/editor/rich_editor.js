@@ -778,9 +778,9 @@ RE.convertEntriesToHTML = function(entryJSON) {
     return root.innerHTML;
 };
 
-RE.convertHTMLToEntries = function(root) {
+RE.convertHTMLToEntries = function() {
     var contents = [];
-    var childNodes = root.childNodes;
+    var childNodes = document.getElementById('editor').childNodes;
     for (var i = 0; i < childNodes.length; i++) {
         var child = childNodes[i];
         if (child.nodeName == 'BR') {
@@ -803,7 +803,7 @@ RE.convertHTMLToEntries = function(root) {
             contents.push(convertDivsToContentEntries(child, 'unstyled'));
         }
     }
-    return contents;
+    return JSON.stringify(contents);
 };
 
 
