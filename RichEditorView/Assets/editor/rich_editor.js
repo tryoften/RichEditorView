@@ -776,20 +776,34 @@ RE.convertHTMLToEntries = function() {
             continue;
         }
         
-        if (child.nodeName == 'OL' || child.nodeName == 'UL') {
-            var liElements = child.childNodes;
-            var listStyle = (child.nodeName == 'OL') ? 'ordered-list-item' : 'unordered-list-item';
-            for (var j = 0; j < liElements.length; j++) {
-                var li = liElements[j];
-                if (li.nodeName == 'BR') {
-                    continue;
-                }
-                contents.push(RE.convertDivsToContentEntries(li.lastChild, listStyle));
-            }
-        }
+        // if (child.nodeName == 'OL' || child.nodeName == 'UL') {
+        //     var liElements = child.childNodes;
+        //     var listStyle = (child.nodeName == 'OL') ? 'ordered-list-item' : 'unordered-list-item';
+        //     for (var j = 0; j < liElements.length; j++) {
+        //         var li = liElements[j];
+        //         if (li.nodeName == 'BR') {
+        //             continue;
+        //         }
+        //         contents.push(RE.convertDivsToContentEntries(li.lastChild, listStyle));
+        //     }
+        // }
         
         if (child.nodeName == 'DIV') {
-            contents.push(RE.convertDivsToContentEntries(child, 'unstyled'));
+            if (child.lastChild.nodeName == 'OL' || child.lastChild.nodeName == 'UL') {
+                var newChild = child.lastChild.childNodes; //New kid on the block bout to get smacked back to the boondocks
+                var liElements = newChild.childNodes;
+                var listStyle = (newChild.nodeName == 'OL') ? 'ordered-list-item' : 'unordered-list-item';
+                for (var j = 0; j < liElements.length; j++) {
+                    var li = liElements[j];
+                    if (li.nodeName == 'BR') {
+                        continue;
+                    }
+                    contents.push(RE.convertDivsToContentEntries(li.lastChild, listStyle));
+                }
+            } else {
+                contents.push(RE.convertDivsToContentEntries(child, 'unstyled'));
+            }
+
         }
     }
     return JSON.stringify(contents);
