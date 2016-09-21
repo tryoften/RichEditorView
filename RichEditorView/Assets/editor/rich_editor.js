@@ -411,12 +411,12 @@ RE.boldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "700";
+        parentNodeObject.className = "TEXT-ONE";
     } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
-            parentNodeObject.parentNode.style.fontWeight = "700";
+            parentNodeObject.parentNodeObject.className = "TEXT-ONE";
         }
-        parentNodeObject.style.fontWeight = "700";
+        parentNodeObject.parentNodeObject.className = "TEXT-ONE";
     }
 };
 
@@ -424,12 +424,12 @@ RE.unboldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "400";
+        parentNodeObject.className = "TEXT-ZERO";
     } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
-            parentNodeObject.parentNode.style.fontWeight = "400";
+            parentNodeObject.parentNode.className = "TEXT-ZERO";
         }
-        parentNodeObject.style.fontWeight = "400";
+        parentNodeObject.className = "TEXT-ZERO";
     }
 };
 
@@ -437,15 +437,12 @@ RE.largeBoldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "700";
-        parentNodeObject.style.fontSize = "large";
+        parentNodeObject.className = "TEXT-TWO";
     } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
-            parentNodeObject.parentNode.style.fontWeight = "700";
-            parentNodeObject.parentNode.style.fontSize = "large";
+            parentNodeObject.parentNode.className = "TEXT-TWO";
         }
-        parentNodeObject.style.fontWeight = "700";
-        parentNodeObject.style.fontSize = "large";
+        parentNodeObject.className = "TEXT-TWO";
     }
 };
 
@@ -453,15 +450,12 @@ RE.unlargeBoldCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontWeight = "400";
-        parentNodeObject.style.fontSize = "medium";
+        parentNodeObject.className = "TEXT-ZERO";
     } else if (sel.anchorNode.parentNode.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
-            parentNodeObject.parentNode.style.fontWeight = "400";
-            parentNodeObject.parentNode.style.fontSize = "medium";
+            parentNodeObject.className = "TEXT-ZERO";
         }
-        parentNodeObject.style.fontWeight = "400";
-        parentNodeObject.style.fontSize = "medium";
+        parentNodeObject.className = "TEXT-ZERO";
     }
 };
 
@@ -469,15 +463,13 @@ RE.italicCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontSize = "x-large";
+        parentNodeObject.className = "QUOTES-ONE";
         parentNodeObject.style.fontStyle = "italic";
     } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
-            parentNodeObject.parentNode.style.fontSize = "x-large";
-            parentNodeObject.parentNode.style.fontStyle = "italic";
+            parentNodeObject.className = "QUOTES-ONE";
         }
-        parentNodeObject.style.fontSize = "x-large";
-        parentNodeObject.style.fontStyle = "italic";
+        parentNodeObject.className = "QUOTES-ONE";
     }
 };
 
@@ -485,15 +477,12 @@ RE.unitalicCurrentDiv = function() {
     var sel = document.getSelection();
     var parentNodeObject = sel.anchorNode.parentNode;
     if (parentNodeObject.localName == "div" || parentNodeObject.localName == "li" || parentNodeObject.localName == "font" || parentNodeObject.id != "editor") {
-        parentNodeObject.style.fontSize = "medium";
-        parentNodeObject.style.fontStyle = "normal";
+        parentNodeObject.className = "QUOTES-ZERO";
     } else if (parentNodeObject.localName == "span" || parentNodeObject.parentNode.id != "editor") {
         if (parentNodeObject.parentNode.localName == "li") {
-            parentNodeObject.parentNode.style.fontSize = "medium";
-            parentNodeObject.parentNode.style.fontStyle = "normal";
+            parentNodeObject.parentNode.className = "QUOTES-ZERO";
         }
-        parentNodeObject.style.fontSize = "medium";
-        parentNodeObject.style.fontStyle = "normal";
+        parentNodeObject.className = "QUOTES-ZERO";
     }
 };
 
@@ -806,10 +795,19 @@ RE.convertHTMLToEntries = function() {
     return JSON.stringify(contents);
 };
 
+RE.guidGenerator = function() {
+    var S4 = function() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    };
+    return (S4()+S4());
+};
+
 
 RE.convertDivsToContentEntries = function(node, listStyle) {
+   
+    
     var contentEntry = {
-        key: node.id,
+        key: node.id || RE.guidGenerator(),
         listStyle: listStyle
     };
     
