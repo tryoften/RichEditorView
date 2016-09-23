@@ -789,10 +789,10 @@ RE.convertHTMLToEntries = function() {
         // }
         
         if (child.nodeName == 'DIV') {
-            if (child.lastChild.nodeName == 'OL' || child.lastChild.nodeName == 'UL') {
-                var newChild = child.lastChild.childNodes; //New kid on the block bout to get smacked back to the boondocks
-                var liElements = newChild.childNodes;
-                var listStyle = (newChild.nodeName == 'OL') ? 'ordered-list-item' : 'unordered-list-item';
+            var innerNode = child.lastChild;
+            if (!!innerNode || innerNode.nodeName == 'OL' || innerNode.nodeName == 'UL') {
+                var liElements = innerNode.childNodes;
+                var listStyle = (innerNode.nodeName == 'OL') ? 'ordered-list-item' : 'unordered-list-item';
                 for (var j = 0; j < liElements.length; j++) {
                     var li = liElements[j];
                     if (li.nodeName == 'BR') {
