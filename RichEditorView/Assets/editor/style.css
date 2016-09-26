@@ -74,7 +74,7 @@ div {
 
 .TEXT-TWO {
     font-weight: 700;
-    font-size: 20pt;
+    font-size: 15pt;
 }
 
 .QUOTES-ZERO {
@@ -86,8 +86,8 @@ div {
 .QUOTES-ONE {
     font-style: italic;
     opacity: .5;
-    text-indent: 40px;
-    font-size: 24pt;
+    text-indent: 30px;
+    font-size: 17pt;
 }
 
 .DIVIDER {
